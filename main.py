@@ -21,6 +21,7 @@ def fetch_digits() -> string:
     response = requests.get(f"{URL}/?cached&n={NUM_DIGITS}")
     if response.status_code == 200:
         print(f"Successfully hit endpoint {URL}\nRetrieved {NUM_DIGITS} digits of pi.")
+
         digits = response.json()[1:]  # Endpoints return 0 as first digit
         return digits
 
@@ -41,6 +42,7 @@ def analyze_distribution(digits: string) -> None:
         fig = plt.figure()
         ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
         ax.yaxis.grid(True)
+
         plt.bar(digit_labels, probs, color="lightblue", width=0.8)
         plt.xlabel("Digit")
         plt.ylabel("Frequency (%)")
@@ -48,6 +50,7 @@ def analyze_distribution(digits: string) -> None:
         plt.show(block=False)
 
     chi_sq, p_val = stats.chisquare(distribution)
+
     print(f"\nFrequency Test: \n\tChi squared: {chi_sq}\tp-value: {p_val}")
     print(f"\tAnalysis took {time.time()-start} seconds.")
 
@@ -69,6 +72,7 @@ def analyze_pairs(digits: string) -> None:
         plt.show(block=False)
 
     chi_sq, p_val = stats.chisquare(freqs.flatten())
+
     print(f"Pair Test: \n\tChi squared: {chi_sq}\tp-value: {p_val}")
     print(f"\tAnalysis took {time.time()-start} seconds.")
 
@@ -83,6 +87,7 @@ def analyze_spaces(digits: string) -> None:
         if last_seen[digit] > -1:
             spaces[digit].append(i - last_seen[digit])
         last_seen[digit] = i
+
     print("Space test:")
     for i in range(10):
         print(f"\t{i}: {sum(spaces[i])/len(spaces[i])}")
@@ -113,6 +118,7 @@ if __name__ == "__main__":
     start = time.time()
     digits = fetch_digits()
     print(f"\tFetching took {time.time()-start} seconds.")
+
     if digits:
         analyze_distribution(digits)
         analyze_pairs(digits)
