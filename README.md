@@ -1,8 +1,9 @@
 # is-pi-random
 ## **Are the digits of pi random?**
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/56771911/173252966-3d55c281-0fab-44fb-a80b-1f19281f3cc4.png">
+</p>
 
-  ![image](https://user-images.githubusercontent.com/56771911/173252966-3d55c281-0fab-44fb-a80b-1f19281f3cc4.png)<br>
-### Beautiful, poetic, and pure conjecture. <br>
 $\pi$ is indeed an infinite, non-repeating decimal, but so are the following:
 - 0.1234567891011121314...
 - 0.1010010001000010000...
