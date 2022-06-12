@@ -89,8 +89,11 @@ def analyze_spaces(digits: string) -> None:
         last_seen[digit] = i
 
     print("Space test:")
+    means = []
     for i in range(10):
-        print(f"\t{i}: {sum(spaces[i])/len(spaces[i])}")
+        means.append(sum(spaces[i]) / len(spaces[i]))
+        t_stat, p_val = stats.ttest_1samp(spaces[i], 10)
+        print(f"T Stat: \t: {t_stat}\tp-value: {p_val}")
 
     if SHOW_IMAGES:
         fig = plt.figure()
