@@ -10,7 +10,7 @@ $\pi$ is indeed an infinite, non-repeating decimal, but so are the following:
 - 0.1010010001000010000...
 - 0.1223334444555556666...
 
-<br>None of these are random, and you most definitely are not going to find the next winning lottery number in any of these sequences. If we want to discuss the validity of the quote's claims, we need to find a more robust method of <br><br>
+<br>None of these are random, and you most definitely are not going to find the next winning lottery number in any of these sequences. If we want to discuss the validity of the quote's claims, we need to find a more robust method of determining its randomness. <br><br>
 $\pi$ can't be random, as it has fixed, determined digits, and we are able to calculate every single one. It makes more sense to ask whether $\pi$ is a [normal number](https://en.wikipedia.org/wiki/Normal_number). If it is, then the quote above is accurate due to the [infinite monkey theorem](https://en.wikipedia.org/wiki/Infinite_monkey_theorem#:~:text=The%20infinite%20monkey%20theorem%20states,an%20infinite%20number%20of%20times).<br>
 ### Setup:
 1 million digits of $\pi$ stored as ASCII should be roughly 1 MB (1 byte per character, 1024 B $\times$ 1024 B $\approx$ 1 MB).
