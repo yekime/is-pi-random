@@ -14,6 +14,7 @@ $\pi$ can't be random, as they have fixed, determined digits, and we are able to
 1 million digits of $\pi$ stored as ASCII should be roughly 1 MB (1 byte per character, 1024 B $\times$ 1024 B $\approx$ 1 MB).
 While not an excessive amount of data to store in this repo, a simple API request makes this a lot easier.
 ```
+NUM_DIGITS = 1000000
 URL = "https://uploadbeta.com/api/pi/"
 response = requests.get(f"{URL}/?cached&n={NUM_DIGITS}")
 ```
