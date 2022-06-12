@@ -4,7 +4,7 @@ import requests
 import numpy as np
 import matplotlib.pyplot as plt
 from numerize import numerize
-from scipy.stats import chisquare
+import scipy.stats as stats
 import seaborn as sns
 
 NUM_DIGITS = 1000000
@@ -41,11 +41,11 @@ def analyze_distribution(digits: string) -> None:
     plt.title(f"Distribution of {numerize.numerize(NUM_DIGITS)} digits of π")
     plt.show(block=False)
 
-    chi_sq, p = chisquare(distribution)
-    print(f"Chi squared: {chi_sq}\tp-value: {p}")
+    chi_sq, p_val = stats.chisquare(distribution)
+    print(f"Chi squared: {chi_sq}\tp-value: {p_val}")
 
 
-def analyze_pairs(digits):
+def analyze_pairs(digits: string) -> None:
     freqs = np.zeros((10, 10))
     for i in range(len(digits) - 1):
         freqs[int(digits[i])][int(digits[i + 1])] += 1
@@ -56,9 +56,27 @@ def analyze_pairs(digits):
     sns.heatmap(probs, linewidth=0.5, vmin=0.08, vmax=0.12, cmap="YlGnBu")
     plt.show()
 
-    chi_sq, p = chisquare(freqs.flatten())
-    print(f"Chi squared: {chi_sq}\tp-value: {p}")
-    return
+    chi_sq, p_val = stats.chisquare(freqs.flatten())
+    print(f"Chi squared: {chi_sq}\tp-value: {p_val}")
+
+
+def analyze_runs(digits: string) -> None:
+    going_up = digits[1] > digits[0]
+    total_runs = 0
+    for i in range(1, len(digits) - 1):
+        running_up = int(digits[i + 1]) > int(digits[i])
+        if running_up != going_up:
+            going_up = running_up
+            total_runs += 1
+
+    expected_mean = (2 * len(digits) - 1) / 3
+    print(expected_mean)
+    print(total_runs)
+    expected_sd = np.sqrt((16 * len(digits) - 29) / 90)
+    print(expected_sd)
+    t_test = (total_runs - expected_mean) / expected_sd
+    p_val = stats.t.sf(np.abs(t_test), len(digits) - 1) * 2
+    print(f"T-statistic: {t_test}\tp-value: {p_val}")
 
 
 if __name__ == "__main__":
@@ -68,3 +86,4 @@ if __name__ == "__main__":
     if digits:
         analyze_distribution(digits)
         analyze_pairs(digits)
+        analyze_runs(digits)
