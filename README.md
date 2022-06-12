@@ -37,4 +37,4 @@ Make sure you have Python and pip, and run ```pip install -r requirements.txt```
 | ![Figure_3](https://user-images.githubusercontent.com/56771911/173251189-c3579f52-c606-43e3-8521-4af8990eb0ee.png) | T Stat:         : 0.123  p-value: 0.900 <br>T Stat:         : 0.811    p-value: 0.417<br>T Stat:         : -0.0911  p-value: 0.927<br>T Stat:         : -0.772   p-value: 0.440<br>T Stat:         : -0.766   p-value: 0.444<br>T Stat:         : -1.19   p-value: 0.234<br>T Stat:         : 1.51      p-value: 0.132<br>T Stat:         : 0.665    p-value: 0.506<br>T Stat:         : 0.0487   p-value: 0.961<br>T Stat:         : -0.352  p-value: 0.724<br><br>Thus, space between identical digits is ~10. |
 
 ### Conclusion:
-These tests do not, in any sense, prove the random distribution of the digits of $\pi$. <br><br>It does however show one statistical interpretation of it: its close enough. 
+These tests do not, in any sense, prove the random distribution of the digits of $\pi$. <br><br>It does however show one statistical interpretation of it: close enough
