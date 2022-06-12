@@ -38,7 +38,9 @@ def analyze_distribution(digits: string) -> None:
     digit_labels = [str(x) for x in range(10)]
 
     if SHOW_IMAGES:
-        plt.figure()
+        fig = plt.figure()
+        ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        ax.yaxis.grid(True)
         plt.bar(digit_labels, probs, color="lightblue", width=0.8)
         plt.xlabel("Digit")
         plt.ylabel("Frequency (%)")
@@ -61,6 +63,9 @@ def analyze_pairs(digits: string) -> None:
     if SHOW_IMAGES:
         plt.figure()
         sns.heatmap(probs, linewidth=0.5, vmin=0.08, vmax=0.12, cmap="YlGnBu")
+        plt.xlabel("Current Digit")
+        plt.ylabel("Next Digit")
+        plt.title(f"Probability of next digit given current digit")
         plt.show(block=False)
 
     chi_sq, p_val = stats.chisquare(freqs.flatten())
@@ -78,14 +83,29 @@ def analyze_spaces(digits: string) -> None:
         if last_seen[digit] > -1:
             spaces[digit].append(i - last_seen[digit])
         last_seen[digit] = i
-
-    plt.figure()
+    print("Space test:")
     for i in range(10):
+        print(f"\t{i}: {sum(spaces[i])/len(spaces[i])}")
 
-        print(f"{i}: {sum(spaces[i])/len(spaces[i])}")
-
-    plt.boxplot(spaces, showfliers=False, patch_artist=True, notch="True", vert=0)
-    plt.show()
+    if SHOW_IMAGES:
+        fig = plt.figure()
+        ax = fig.add_axes([0.1, 0.1, 0.8, 0.8])
+        plt.xlabel("Digit")
+        plt.ylabel("Distance")
+        plt.title(f"Distance between recurrence of the same digit")
+        ax.set_xticklabels(np.arange(0, 10))
+        bplot = ax.boxplot(
+            spaces,
+            showfliers=False,
+            notch=True,
+            vert=True,
+            patch_artist=True,
+        )
+        ax.set_facecolor("lightgrey")
+        ax.yaxis.grid(True)
+        for patch in bplot["boxes"]:
+            patch.set_facecolor("lightblue")
+        plt.show()
     print(f"\tAnalysis took {time.time()-start} seconds.")
 
 
